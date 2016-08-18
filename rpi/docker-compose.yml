@@ -1,0 +1,6 @@
+app:
+    build: ./php
+    volumes:
+        - ../app/dist:/app
+    ports:
+        - "8000:8000"

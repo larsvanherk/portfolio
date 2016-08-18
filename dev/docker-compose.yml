@@ -1,0 +1,8 @@
+app:
+    image: eboraas/apache-php
+    volumes:
+        - ../app/dist/:/var/www/html/
+    ports:
+        - "3000:80"
+    environment:
+        DNSDOCK_ALIAS: portfolio.docker.larsvanherk.com

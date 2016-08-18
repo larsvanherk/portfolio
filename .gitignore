@@ -1,0 +1,11 @@
+# OSX system files
+*.DS_Store
+
+# Generated content
+app/dist/
+app/js/bundle.js
+app/css/bundle.css
+
+# Installed dependencies
+app/bower_components/
+app/node_modules/

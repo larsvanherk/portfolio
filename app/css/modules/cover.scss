@@ -1,0 +1,26 @@
+/*
+CSS FOR COVER FOR PORTFOLIO LARS VAN HERK
+COPYRIGHT LICENSE CREATIVE COMMONS BY-NC-SA
+SEE http://creativecommons.org/licenses/by-nc-sa/3.0/ FOR MORE INFO
+REFERENCED SCRIPTS BELONG TO THEIR RESPECTIVE OWNERS
+    SEE FURTHER COMMENTS FOR EXTERNAL SOURCES
+*/
+
+#cover {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    
+    video {
+        width: 100%;
+        z-index: -998;
+    }
+    
+    #placeholder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -999;
+    }
+}

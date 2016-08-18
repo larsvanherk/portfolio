@@ -1,0 +1,26 @@
+{
+  "name": "portfolio",
+  "authors": [
+    "Lars van Herk <me@larsvanherk.com>"
+  ],
+  "description": "Web development portfolio for Lars van Herk (larsvanherk.com)",
+  "main": "index.html",
+  "keywords": [
+    "portfolio",
+    "web",
+    "php"
+  ],
+  "license": "CC-BY-SA",
+  "homepage": "www.larsvanherk.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "portfolio",
+  "version": "1.1.1",
+  "description": "Web development portfolio for Lars van Herk (larsvanherk.com)",
+  "main": "gulpfile.js",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-csso": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.1",
+    "gulp-uglify": "^1.5.3",
+    "merge-stream": "^1.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.intranet.larsvanherk.com:work/portfolio.git"
+  },
+  "keywords": [
+    "portfolio",
+    "web",
+    "php"
+  ],
+  "author": "Lars van Herk <me@larsvanherk.com>",
+  "license": "CC-BY-SA-4.0"
+}
