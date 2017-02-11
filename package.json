@@ -1,0 +1,44 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Porfolio site for Lars van Herk",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/work-portfolio/portfolio.git"
+  },
+  "keywords": [
+    "portfolio",
+    "nodejs",
+    "express",
+    "gulp",
+    "scss"
+  ],
+  "author": "Lars van Herk <lars@irrealis.io>",
+  "license": "CC-BY-NC-ND-4.0",
+  "bugs": {
+    "url": "https://gitlab.com/work-portfolio/portfolio/issues"
+  },
+  "homepage": "http://www.larsvanherk.com",
+  "dependencies": {
+    "express": "^4.14.1",
+    "forcedomain": "^0.8.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.7.2",
+    "browser-sync": "^2.18.7",
+    "cssnano": "^3.10.0",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-postcss": "^6.3.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.4.0"
+  }
+}
