@@ -8,11 +8,17 @@
              Copyright 2017
 */
 
-//// RESET, FIXES & VARIABLES ////
-@import './partials/_reset.scss';
-@import './partials/_variables.scss';
+html {
+  min-height: 100%;
 
-//// GENERAL STYLING ////
-@import './partials/_general.scss';
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-@import './partials/components/_content.scss';
+body {
+  background: #d35400;
+  color: white;
+
+  padding: 90px;
+}

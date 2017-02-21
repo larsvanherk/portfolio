@@ -8,11 +8,7 @@
              Copyright 2017
 */
 
-//// RESET, FIXES & VARIABLES ////
-@import './partials/_reset.scss';
-@import './partials/_variables.scss';
+//// App Wide Variables ////
 
-//// GENERAL STYLING ////
-@import './partials/_general.scss';
-
-@import './partials/components/_content.scss';
+$header-fonts: "museo-slab",serif;
+$content-fonts: "essonnes-text",serif;
