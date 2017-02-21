@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: landing-page
+  namespace: portfolio
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        module: frontend
+    spec:
+      imagePullSecrets:
+        - name: gitlab
+      containers:
+        - name: app
+          image: registry.gitlab.com/work-portfolio/portfolio:0.1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000

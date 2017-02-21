@@ -11,6 +11,8 @@ var sourcemaps   = require('gulp-sourcemaps');
 var imagemin     = require('gulp-imagemin');
 var htmlmin      = require('gulp-htmlmin');
 
+var version = require('./package.json').version;
+
 gulp.task('default', ['build']);
 
 gulp.task('build', ['html', 'sass', 'images', 'robots']);
@@ -69,8 +71,8 @@ gulp.task('serve', ['build'], function() {
 });
 
 gulp.task('dist', ['build'], function() {
-  execShell('docker build -t registry.gitlab.com/work-portfolio/portfolio .');
-  execShell('docker push registry.gitlab.com/work-portfolio/portfolio');
+  execShell('docker build -t registry.gitlab.com/work-portfolio/portfolio:' + version + ' .');
+  execShell('docker push registry.gitlab.com/work-portfolio/portfolio:' + version);
 });
 
 gulp.task('clean', function() {
