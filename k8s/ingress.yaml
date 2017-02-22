@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    module: portfolio
+  name: portfolio
+  namespace: larsvanherk
+spec:
+  rules:
+  - host: www.larsvanherk.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: portfolio
+          servicePort: 80
+  - host: larsvanherk.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: portfolio
+          servicePort: 80
