@@ -11,7 +11,10 @@ spec:
     port: 80
     protocol: TCP
     targetPort: 5000
+  - name: healthz
+    port: 5001
+    protocol: TCP
+    targetPort: 5001
   selector:
     module: portfolio
   sessionAffinity: None
-  type: NodePort

@@ -30,17 +30,18 @@ app.get('/', function (req, res) {
     res.sendFile('dist/index.html', { root : __dirname });
 });
 
-// Configure K8S health probe point
+// Configure K8S health check endpoint
 
 healthz.set('x-powered-by', false);
 healthz.get('/healthz', function (req, res) {
     res.sendStatus(200);
 });
 
+// Start the app!
 app.listen(5000, function() {
     console.log(prefix + "Server started!");
 
     healthz.listen(5001, function() {
-        console.log(prefix + "Kubernetes health probe point started!");
+        console.log(prefix + "Kubernetes health check endpoint started!");
     });
 });
