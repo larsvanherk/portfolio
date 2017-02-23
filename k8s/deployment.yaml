@@ -5,6 +5,7 @@ metadata:
   namespace: larsvanherk
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
   template:
     metadata:
       labels:
@@ -14,7 +15,7 @@ spec:
         - name: gitlab
       containers:
         - name: app
-          image: registry.gitlab.com/work-portfolio/portfolio:0.1.0
+          image: registry.gitlab.com/work-portfolio/portfolio:0.1.1
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
