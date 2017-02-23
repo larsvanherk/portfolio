@@ -7,14 +7,19 @@ var prefix = "[PORTFOLIO v" + pjson.version + "] ";
 // Disable server signature
 app.set('x-powered-by', false);
 
+// Log all requests
+app.use(function(req, res, next) {
+    console.log(prefix + "Received request to url '" + req.url + "': ", req.headers['user-agent']);
+
+    next();
+});
+
 // Serve from dist folder
 app.use(express.static('dist'));
 
-// Log requests on access
+// Application routes
 app.get('/', function (req, res) {
-    console.log(prefix + "Received request to url '" + req.url + "': ", req.headers['user-agent']);
-
-    res.sendFile('dist/index.html', { root : __dirname});
+    res.sendFile('dist/index.html', { root : __dirname });
 });
 
 app.listen(5000, function() {

@@ -14,3 +14,4 @@ spec:
   selector:
     module: portfolio
   sessionAffinity: None
+  type: NodePort
