@@ -10,14 +10,14 @@ spec:
   - host: www.larsvanherk.com
     http:
       paths:
-      - path: /
+      - path: /*
         backend:
           serviceName: portfolio
           servicePort: 80
   - host: larsvanherk.com
     http:
       paths:
-      - path: /
+      - path: /*
         backend:
           serviceName: portfolio
           servicePort: 80

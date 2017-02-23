@@ -71,8 +71,14 @@ gulp.task('serve', ['build'], function() {
 });
 
 gulp.task('dist', ['build'], function() {
-  execShell('docker build -t registry.gitlab.com/work-portfolio/portfolio:' + version + ' .');
-  execShell('docker push registry.gitlab.com/work-portfolio/portfolio:' + version);
+  console.log('Building PORTFOLIO version ' + version + '!');
+  console.log('Waiting 10s before beginning...');
+
+  setTimeout(function() {
+    execShell('docker build -t registry.gitlab.com/work-portfolio/portfolio:' + version + ' .');
+    execShell('docker push registry.gitlab.com/work-portfolio/portfolio:' + version);
+  }, 10000);
+  
 });
 
 gulp.task('clean', function() {
