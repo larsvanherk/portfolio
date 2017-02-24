@@ -1,47 +1,48 @@
 var express = require('express');
 var force = require('forcedomain');
 var app = express();
-var healthz = express();
 var pjson = require('./package.json');
 
+//// SERVER SETTINGS ////
+// Loggin Prefix
 var prefix = "[PORTFOLIO v" + pjson.version + "] ";
 
 // Disable server signature
 app.set('x-powered-by', false);
 
-// Force HTTPS & www-based domain
-app.use(force({
-    hostname: 'www.larsvanherk.com',
-    protocol: 'https'
-}));
+//// MAIN APP ////
+// Initialize main app Router
+var router = express.Router();
 
-// Log all requests
-app.use(function(req, res, next) {
+// General route-univeral logic
+router.use(function(req, res, next) {
     console.log(prefix + "Received request to url '" + req.url + "': ", req.headers['user-agent']);
-
     next();
 });
 
-// Serve from dist folder
-app.use(express.static('dist'));
+router.use(force({hostname: 'www.larsvanherk.com', protocol: 'https'}));
 
-// Application routes
-app.get('/', function (req, res) {
+// Serve from dist folder
+router.use(express.static('dist'));
+
+// Route definitions
+router.get('/', function (req, res) {
     res.sendFile('dist/index.html', { root : __dirname });
 });
 
-// Configure K8S health check endpoint
+//// MISC APPS ////
+// Kubernetes health check
+var health = express.Router();
 
-healthz.set('x-powered-by', false);
-healthz.get('/healthz', function (req, res) {
+health.get('/healthz', function(req, res) {
     res.sendStatus(200);
 });
+
+// Bind routers
+app.use(router);
+app.use(health);
 
 // Start the app!
 app.listen(5000, function() {
     console.log(prefix + "Server started!");
-
-    healthz.listen(5001, function() {
-        console.log(prefix + "Kubernetes health check endpoint started!");
-    });
 });
