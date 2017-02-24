@@ -34,13 +34,13 @@ router.get('/', function (req, res) {
 // Kubernetes health check
 var health = express.Router();
 
-health.get('/healthz', function(req, res) {
+health.get('/', function(req, res) {
     res.sendStatus(200);
 });
 
 // Bind routers
-app.use(router);
-app.use(health);
+app.use('/healthz', health);
+app.use(/^(?!\/healthz).*/, router);
 
 // Start the app!
 app.listen(5000, function() {
