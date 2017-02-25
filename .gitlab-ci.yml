@@ -23,10 +23,13 @@ Build Docker Image:
   image: docker:latest
   services:
     - docker:dind
+  variables:
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_BUILD_TAG
   script:
     - docker info
-    - docker build -t registry.gitlab.com/work-portfolio/portfolio:$CI_BUILD_TAG .
-    - docker push registry.gitlab.com/work-portfolio/portfolio:$CI_BUILD_TAG
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD registry.gitlab.com
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
   dependencies:
     - Build App
   only:
