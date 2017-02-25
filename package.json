@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Porfolio site for Lars van Herk",
   "main": "index.js",
   "scripts": {
@@ -35,7 +35,6 @@
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
-    "gulp-git": "^2.0.0",
     "gulp-htmlmin": "^3.0.0",
     "gulp-imagemin": "^3.1.1",
     "gulp-json-editor": "^2.2.1",

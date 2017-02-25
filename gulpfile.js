@@ -1,19 +1,17 @@
 var gulp         = require('gulp');
+var execSync     = require('child_process').execSync;
 var argv         = require('yargs').argv;
 var jeditor      = require("gulp-json-editor");
 var del          = require('del');
 var browserSync  = require('browser-sync');
 var autoprefixer = require('autoprefixer');
 var cssnano      = require('cssnano');
-var git          = require('gulp-git');
 var concat       = require('gulp-concat');
 var sass         = require('gulp-sass');
 var postcss      = require('gulp-postcss');
 var sourcemaps   = require('gulp-sourcemaps');
 var imagemin     = require('gulp-imagemin');
 var htmlmin      = require('gulp-htmlmin');
-
-var version = require('./package.json').version;
 
 var releaseType = argv.release;
 
@@ -79,7 +77,7 @@ gulp.task('release-version', function() {
         .pipe(jeditor(function (json) {
           var versionTypes = ['major', 'minor', 'patch'];
 
-          if(!versionTypes.contains(releaseType)) {
+          if(versionTypes.indexOf(releaseType) == -1) {
             throw Error('Release version type not recognized: ' + releaseType);
           }
 
@@ -94,17 +92,18 @@ gulp.task('release-version', function() {
 
           return json;
         }))
-        .pipe(gulp.dest('./package.json'));
+        .pipe(gulp.dest('./', {overwrite: true}));
   
 });
 
 gulp.task('release', ['release-version'], function() {
-  return gulp.src('./')
-        .pipe(git.checkout('master'))
-        .pipe(git.add())
-        .pipe(git.commit('PORTFOLIO release commit for version v' + version))
-        .pipe(git.tag(version, 'Release v' + version + ' for PORTFOLIO.'))
-        .pipe(git.push('origin', 'master', {args: ' --tags'}));
+  var version = require('./package.json').version;
+
+  execShell('git status');
+  execShell('git add ./');
+  execShell('git commit -m "PORTFOLIO release commit for version v' + version + '"');
+  execShell('git tag -a ' + version + ' -m "Release v' + version + ' for PORTFOLIO."');
+  execShell('git push origin master --tags');
 });
 
 gulp.task('clean', function() {
@@ -112,3 +111,9 @@ gulp.task('clean', function() {
     'dist/'
   ]);
 });
+
+//// HELPER FUNCTIONS ////
+
+function execShell(cmd) {
+  execSync(cmd, {stdio:[0,1,2]});
+}
