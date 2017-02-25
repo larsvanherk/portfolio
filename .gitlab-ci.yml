@@ -13,7 +13,9 @@ Build App:
     when: always
     expire_in: 5 days
     paths:
-      - ./**/*
+      - dist/**/*
+      - package.json
+      - index.js
 
 Build Docker Image:
   stage: dist
