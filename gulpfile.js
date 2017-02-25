@@ -78,36 +78,20 @@ gulp.task('serve', ['build'], function() {
 gulp.task('release-version', function() {
   return gulp.src('./package.json')
         .pipe(jeditor(function (json) {
-          if(!['major', 'minor', 'patch'].contains(releaseType)) {
-            throw Error('Release version type not recognized: ')
+          var versionTypes = ['major', 'minor', 'patch'];
+
+          if(!versionTypes.contains(releaseType)) {
+            throw Error('Release version type not recognized: ' + releaseType);
           }
 
-          var version = json.version;
+          var tag = json.version.split('.');
 
-          switch(releaseType) {
-            case 'major':
-              var ver_parts = version.split('.');
-              ver_parts[0] = parseInt(ver_parts[0]) + 1;
+          var tagIndex = versionTypes.indexOf(releaseType);
+          tag[tagIndex] = parseInt(tag[tagIndex]) + 1;
 
-              version = ver_parts.join('.');
-              break;
+          json.version = tag.join('.');
 
-            case 'minor':
-              var ver_parts = version.split('.');
-              ver_parts[1] = parseInt(ver_parts[1]) + 1;
-
-              version = ver_parts.join('.');
-              break;
-
-            case 'patch':
-              var ver_parts = version.split('.');
-              ver_parts[2] = parseInt(ver_parts[2]) + 1;
-
-              version = ver_parts.join('.');
-              break;
-          }
-
-          json.version = version;
+          console.log('Tagging ' + releaseType + ' version release v' + json.version);
 
           return json;
         }))
