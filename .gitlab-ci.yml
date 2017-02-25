@@ -20,6 +20,8 @@ Build App:
 Build Docker Image:
   stage: dist
   image: docker:latest
+  services:
+    - docker:dind
   script:
     - docker info
     - docker build -t registry.gitlab.com/work-portfolio/portfolio:$CI_BUILD_TAG .
