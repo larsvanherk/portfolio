@@ -101,7 +101,7 @@ gulp.task('release', ['release-version'], function() {
 
   execShell('git status');
   execShell('git add ./');
-  execShell('git commit -m "[ci skip] PORTFOLIO release commit for version v' + version + '"');
+  execShell('git commit -m "PORTFOLIO release commit for version v' + version + '"');
   execShell('git tag -a ' + version + ' -m "Release v' + version + ' for PORTFOLIO."');
   execShell('git push origin master --tags');
 });
