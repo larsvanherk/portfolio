@@ -5,7 +5,7 @@ stages:
 
 Build App:
   stage: build
-  image: node:6.10-alpine
+  image: node:6.10
   script:
     - npm install
     - npm run-script build
