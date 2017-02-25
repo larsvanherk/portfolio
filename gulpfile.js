@@ -1,7 +1,6 @@
 var gulp         = require('gulp');
 var argv         = require('yargs').argv;
 var jeditor      = require("gulp-json-editor");
-var execSync     = require('child_process').execSync;
 var del          = require('del');
 var browserSync  = require('browser-sync');
 var autoprefixer = require('autoprefixer');
@@ -113,9 +112,3 @@ gulp.task('clean', function() {
     'dist/'
   ]);
 });
-
-//// HELPER FUNCTIONS ////
-
-function execShell(cmd) {
-  execSync(cmd, {stdio:[0,1,2]});
-}
