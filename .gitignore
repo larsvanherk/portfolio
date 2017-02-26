@@ -1,6 +1,5 @@
 ### Build Artifacts ####
 dist/
-k8s/dist/
 
 ### Visual Studio Code ###
 .vscode/
