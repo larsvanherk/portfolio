@@ -1,5 +1,6 @@
 var gulp         = require('gulp');
 var execSync     = require('child_process').execSync;
+var confirm      = require('confirm-cli');
 var argv         = require('yargs').argv;
 var jeditor      = require("gulp-json-editor");
 var del          = require('del');
@@ -99,11 +100,22 @@ gulp.task('release-version', function() {
 gulp.task('release', ['release-version'], function() {
   var version = require('./package.json').version;
 
-  execShell('git status');
-  execShell('git add ./');
-  execShell('git commit -m "PORTFOLIO release commit for version v' + version + '"');
-  execShell('git tag -a ' + version + ' -m "Release v' + version + ' for PORTFOLIO."');
-  execShell('git push origin master --tags');
+  console.log('Releasing PORTFOLIO version ' + version + '!');
+  console.log('Please make sure Deployment image version is correct!');
+
+  confirm('Would you like to continue?', function() {
+    
+    execShell('git status');
+    execShell('git add ./');
+    execShell('git commit -m "PORTFOLIO release commit for version v' + version + '"');
+    execShell('git tag -a ' + version + ' -m "Release v' + version + ' for PORTFOLIO."');
+    execShell('git push origin master --tags');
+
+  }, function() {
+
+    console.log("Aborted...");
+
+  });
 });
 
 gulp.task('clean', function() {
