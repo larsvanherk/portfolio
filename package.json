@@ -4,7 +4,6 @@
   "description": "Porfolio site for Lars van Herk",
   "main": "index.js",
   "scripts": {
-    "ci": "./node_modules/gulp/bin/gulp.js k8s-ci-tag",
     "build": "./node_modules/gulp/bin/gulp.js",
     "start": "node index.js"
   },
@@ -42,7 +41,6 @@
     "gulp-json-editor": "^2.2.1",
     "gulp-postcss": "^6.3.0",
     "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.5.4",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.4.0"
   }
