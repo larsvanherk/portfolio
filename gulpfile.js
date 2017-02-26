@@ -113,6 +113,7 @@ gulp.task('release', ['release-version'], function() {
 
   }, function() {
 
+    execShell('git checkout HEAD -- package.json');
     console.log("Aborted...");
 
   });

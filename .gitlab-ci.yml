@@ -36,6 +36,7 @@ Build Docker Image:
     - tags
 
 Deploy to Production:
+  environment: Production
   stage: deploy
   image: google/cloud-sdk
   script:
