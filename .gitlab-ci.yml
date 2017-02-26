@@ -43,7 +43,7 @@ Deploy to Production:
     - echo "$GOOGLE_KEY" > key.json
     - gcloud auth activate-service-account --key-file key.json
     - gcloud config set compute/zone europe-west1-c
-    - gcloud config set project kubernetes
+    - gcloud config set project kubernetes-155014
     - gcloud config set container/use_client_certificate True
     - gcloud container clusters get-credentials kube-prd
     - kubectl apply -f k8s/deployment.yaml
