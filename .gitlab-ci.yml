@@ -9,12 +9,14 @@ Build App:
   script:
     - npm install
     - npm run-script build
+    - npm run-script ci
   artifacts:
     when: always
     expire_in: 5 days
     paths:
       - dist/*
       - dist/**/*
+      - k8s/dist/*
       - package.json
       - index.js
 
@@ -46,7 +48,6 @@ Deploy to Production:
     - gcloud config set project kubernetes-155014
     - gcloud config set container/use_client_certificate True
     - gcloud container clusters get-credentials kube-prd
-    - kubectl apply -f k8s/deployment.yaml
-    - kubectl label -f k8s/deployment.yaml app=$CI_ENVIRONMENT_SLUG
+    - kubectl apply -f k8s/dist/deployment.yaml
   only:
     - tags

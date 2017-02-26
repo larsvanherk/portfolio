@@ -9,10 +9,12 @@ spec:
   strategy:
     rollingUpdate:
       maxSurge: 5
+      maxUnavailable: 0
   template:
     metadata:
       labels:
         module: portfolio
+        app: ___GITLAB_CI_LABEL___
     spec:
       imagePullSecrets:
         - name: gitlab

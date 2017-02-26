@@ -13,6 +13,7 @@ var postcss      = require('gulp-postcss');
 var sourcemaps   = require('gulp-sourcemaps');
 var imagemin     = require('gulp-imagemin');
 var htmlmin      = require('gulp-htmlmin');
+var replace      = require('gulp-replace');
 
 var releaseType = argv.release;
 
@@ -60,6 +61,12 @@ gulp.task('images-watch', ['images'], function(done) {
 gulp.task('robots', function() {
   return gulp.src('src/robots.txt')
         .pipe(gulp.dest('dist'));
+});
+
+gulp.task('k8s-ci-tag', function() {
+  return gulp.src('k8s/deployment.yaml')
+        .pipe(replace(/___GITLAB_CI_LABEL___/, process.env.CI_ENVIRONMENT_SLUG))
+        .pipe(gulp.dest('k8s/dist'));
 });
 
 gulp.task('serve', ['build'], function() {
@@ -121,7 +128,8 @@ gulp.task('release', ['release-version'], function() {
 
 gulp.task('clean', function() {
   del([
-    'dist/'
+    'dist/',
+    'k8s/dist'
   ]);
 });
 
