@@ -22,3 +22,35 @@ body {
 
   padding: 90px;
 }
+
+a {
+  position: relative;
+
+  color: white;
+  text-decoration: none;
+
+  &.link {
+    font-style: italic;
+
+    &:before {
+      content: '';
+      background: white;
+
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+
+      width: 50%;
+      height: 1px;
+
+      transform: translateX(-50%);
+      transition: width .2s ease, bottom .2s ease;
+    }
+
+    &:hover:before {
+      bottom: -2px;
+
+      width: 100%;
+    }
+  }
+}

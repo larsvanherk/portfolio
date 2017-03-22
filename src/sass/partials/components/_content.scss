@@ -32,37 +32,5 @@ p {
   &.contact-info {
     margin-top: 2em;
     font-size: 1.2em;
-
-    a {
-      position: relative;
-
-      color: white;
-      text-decoration: none;
-
-      &#irrealis {
-        font-style: italic;
-
-        &:before {
-          content: '';
-          background: white;
-
-          position: absolute;
-          bottom: -4px;
-          left: 50%;
-
-          width: 50%;
-          height: 1px;
-
-          transform: translateX(-50%);
-          transition: width .2s ease, bottom .2s ease;
-        }
-
-        &:hover:before {
-          bottom: -2px;
-
-          width: 100%;
-        }
-      }
-    }
   }
 }
