@@ -8,14 +8,14 @@
              Copyright 2017
 */
 
-//// RESET, FIXES & VARIABLES ////
-@import './partials/_reset.scss';
-@import './partials/_variables.scss';
+@media only screen and (max-width: 1300px) {
+  h1 {
+    margin-bottom: 30px;
 
-//// GENERAL STYLING ////
-@import './partials/_general.scss';
+    font-size: 10em;
+  }
 
-@import './partials/components/_content.scss';
-
-//// MEDIA QUERIES ////
-@import './partials/mediaqueries/_content.scss';
+  p {
+    font-size: 2em;
+  }
+}
