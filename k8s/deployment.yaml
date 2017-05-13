@@ -20,7 +20,7 @@ spec:
         - name: gitlab
       containers:
         - name: app
-          image: registry.gitlab.com/work-portfolio/portfolio:0.1.8
+          image: registry.gitlab.com/work-portfolio/portfolio:0.1.9
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
