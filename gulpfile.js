@@ -22,8 +22,8 @@ gulp.task('build', ['html', 'sass', 'images', 'robots']);
 
 gulp.task('html', function() {
   return gulp.src('src/*.html')
-        .pipe(htmlmin({collapseWhitespace: true}))
-        .pipe(gulp.dest('dist'));
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('html-watch', ['html'], function(done) {
@@ -33,23 +33,23 @@ gulp.task('html-watch', ['html'], function(done) {
 
 gulp.task('sass', function() {
   return gulp.src('src/sass/main.scss')
-        .pipe(sass().on('error', sass.logError))
-        .pipe(sourcemaps.init())
-        .pipe(concat('app.css'))
-        .pipe(postcss([
-          autoprefixer({ browsers: ['last 4 versions'] }),
-          cssnano()
-        ]))
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('dist'))
-        .pipe(browserSync.stream());
+    .pipe(sass().on('error', sass.logError))
+    .pipe(sourcemaps.init())
+    .pipe(concat('app.css'))
+    .pipe(postcss([
+      autoprefixer({ browsers: ['last 4 versions'] }),
+      cssnano()
+    ]))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('dist'))
+    .pipe(browserSync.stream());
 });
 
 gulp.task('images', function() {
   del(['dist/images']);
   return gulp.src('src/images/**/*')
-        .pipe(imagemin())
-        .pipe(gulp.dest('dist/images'));
+    .pipe(imagemin())
+    .pipe(gulp.dest('dist/images'));
 });
 
 gulp.task('images-watch', ['images'], function(done) {
@@ -59,7 +59,7 @@ gulp.task('images-watch', ['images'], function(done) {
 
 gulp.task('robots', function() {
   return gulp.src('src/robots.txt')
-        .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('serve', ['build'], function() {
@@ -75,26 +75,26 @@ gulp.task('serve', ['build'], function() {
 
 gulp.task('release-version', function() {
   return gulp.src('./package.json')
-        .pipe(jeditor(function (json) {
-          var versionTypes = ['major', 'minor', 'patch'];
+    .pipe(jeditor(function (json) {
+      var versionTypes = ['major', 'minor', 'patch'];
 
-          if(versionTypes.indexOf(releaseType) === -1) {
-            throw Error('Release version type not recognized: ' + releaseType);
-          }
+      if(versionTypes.indexOf(releaseType) === -1) {
+        throw Error('Release version type not recognized: ' + releaseType);
+      }
 
-          var tag = json.version.split('.');
+      var tag = json.version.split('.');
 
-          var tagIndex = versionTypes.indexOf(releaseType);
-          tag[tagIndex] = parseInt(tag[tagIndex]) + 1;
+      var tagIndex = versionTypes.indexOf(releaseType);
+      tag[tagIndex] = parseInt(tag[tagIndex]) + 1;
 
-          json.version = tag.join('.');
+      json.version = tag.join('.');
 
-          console.log('Tagging ' + releaseType + ' version release v' + json.version);
+      console.log('Tagging ' + releaseType + ' version release v' + json.version);
 
-          return json;
-        }))
-        .pipe(gulp.dest('./', {overwrite: true}));
-  
+      return json;
+    }))
+    .pipe(gulp.dest('./', {overwrite: true}));
+
 });
 
 gulp.task('release', ['release-version'], function() {
@@ -103,7 +103,7 @@ gulp.task('release', ['release-version'], function() {
   console.log('Releasing PORTFOLIO version ' + version + '!');
 
   confirm('Would you like to continue?', function() {
-    
+
     execShell('git status');
     execShell('git add ./');
     execShell('git commit -m "PORTFOLIO release commit for version v' + version + '"');
