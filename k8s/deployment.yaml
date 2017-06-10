@@ -14,13 +14,12 @@ spec:
     metadata:
       labels:
         module: portfolio
-        app: ___GITLAB_CI_LABEL___
     spec:
       imagePullSecrets:
         - name: gitlab
       containers:
         - name: app
-          image: registry.gitlab.com/work-portfolio/portfolio:0.1.9
+          image: registry.gitlab.com/work-portfolio/portfolio:___DPL_VERSION_TAG___
           imagePullPolicy: Always
           ports:
             - containerPort: 5000

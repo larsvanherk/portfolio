@@ -78,7 +78,7 @@ gulp.task('release-version', function() {
         .pipe(jeditor(function (json) {
           var versionTypes = ['major', 'minor', 'patch'];
 
-          if(versionTypes.indexOf(releaseType) == -1) {
+          if(versionTypes.indexOf(releaseType) === -1) {
             throw Error('Release version type not recognized: ' + releaseType);
           }
 
@@ -101,7 +101,6 @@ gulp.task('release', ['release-version'], function() {
   var version = require('./package.json').version;
 
   console.log('Releasing PORTFOLIO version ' + version + '!');
-  console.log('Please make sure Deployment image version is correct!');
 
   confirm('Would you like to continue?', function() {
     

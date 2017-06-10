@@ -4,6 +4,7 @@
   "description": "Porfolio site for Lars van Herk",
   "main": "index.js",
   "scripts": {
+    "dev": "gulp serve",
     "build": "./node_modules/gulp/bin/gulp.js",
     "start": "node index.js"
   },
