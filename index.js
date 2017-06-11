@@ -10,6 +10,8 @@ var prefix = "[PORTFOLIO v" + pjson.version + "] ";
 var forceSSL = function(req, res, next) {
     var proto = req.get('X-Forwarded-Protocol');
 
+    console.log("Found protocol:", proto);
+
     if (proto === "http") {
         var url;
         if (req.headers.host.indexOf("http://") !== -1) {
@@ -17,6 +19,8 @@ var forceSSL = function(req, res, next) {
         } else {
             url = "https://" + req.headers.host;
         }
+
+        console.log("Redirecting to:", url);
         res.redirect(301, url);
     } else {
       next();
