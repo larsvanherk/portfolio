@@ -20,3 +20,4 @@ spec:
     module: portfolio
     env: production
   sessionAffinity: None
+  type: NodePort

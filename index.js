@@ -1,5 +1,4 @@
 var express = require('express');
-var force = require('forcedomain');
 var app = express();
 var pjson = require('./package.json');
 
@@ -7,11 +6,19 @@ var pjson = require('./package.json');
 // Logging Prefix
 var prefix = "[PORTFOLIO v" + pjson.version + "] ";
 
-// Domain redirector
-var redirector = force({hostname: 'www.larsvanherk.com', protocol: 'https'});
+// HTTPS Redirector
+var forceSSL = function(req, res, next) {
+    var proto = req.headers.host.split(":")[0];
+
+    if (proto === "http") {
+        var url = req.headers.host.replace("http://", "https://");
+        res.redirect(301, url);
+    } else {
+      next();
+    }
+};
 
 // Request logger
-
 var logger = function(req, res, next) {
     console.log(prefix + "Received request to url '" + req.url + "': ", req.headers['user-agent']);
     next();
@@ -42,7 +49,7 @@ health.get('/', function(req, res) {
 
 // Bind routers
 app.use('/healthz', health);
-app.use('/', [redirector, logger, router]);
+app.use('/', [forceSSL, logger, router]);
 
 // Start the app!
 app.listen(5000, function() {

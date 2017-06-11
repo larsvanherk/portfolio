@@ -27,7 +27,7 @@
   "homepage": "http://www.larsvanherk.com",
   "dependencies": {
     "express": "^4.14.1",
-    "forcedomain": "^0.8.0"
+    "express-force-ssl": "^0.3.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
