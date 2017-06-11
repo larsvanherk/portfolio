@@ -8,17 +8,15 @@ var prefix = "[PORTFOLIO v" + pjson.version + "] ";
 
 // HTTPS Redirector
 var forceSSL = function(req, res, next) {
-    console.log("Request proto is:", req.protocol);
+    var proto = req.get('X-Forwarded-Protocol');
 
-    if (req.protocol === "http") {
+    if (proto === "http") {
         var url;
         if (req.headers.host.indexOf("http://") !== -1) {
             url = req.headers.host.replace("http://", "https://");
         } else {
             url = "https://" + req.headers.host;
         }
-
-        console.log("Redirecting to url:", url);
         res.redirect(301, url);
     } else {
       next();
