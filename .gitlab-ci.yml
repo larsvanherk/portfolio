@@ -35,8 +35,7 @@ Build Docker Image:
   only:
     - tags
 
-Deploy to Production:
-  environment: Production
+Deploy to Staging:
   stage: deploy
   image: google/cloud-sdk
   script:
@@ -46,7 +45,29 @@ Deploy to Production:
     - gcloud config set project kubernetes-155014
     - gcloud config set container/use_client_certificate True
     - gcloud container clusters get-credentials kube-prd
-    - sed -i 's/___DPL_VERSION_TAG___/'"$CI_COMMIT_TAG"'/g' k8s/deployment.yaml
+    - sed -i 's/___DPL_VERSION_TAG___/'"$CI_COMMIT_TAG"'/g' k8s/staging/deployment.yaml
     - kubectl apply -f k8s/deployment.yaml
+  environment:
+    name: Staging
+    url: https://staging.larsvanherk.com
+  only:
+    - tags
+
+Deploy to Production:
+  stage: deploy
+  image: google/cloud-sdk
+  script:
+    - echo "$GOOGLE_KEY" > key.json
+    - gcloud auth activate-service-account --key-file key.json
+    - gcloud config set compute/zone europe-west1-c
+    - gcloud config set project kubernetes-155014
+    - gcloud config set container/use_client_certificate True
+    - gcloud container clusters get-credentials kube-prd
+    - sed -i 's/___DPL_VERSION_TAG___/'"$CI_COMMIT_TAG"'/g' k8s/production/deployment.yaml
+    - kubectl apply -f k8s/deployment.yaml
+  environment:
+    name: Production
+    url: https://www.larsvanherk.com
+  when: manual
   only:
     - tags

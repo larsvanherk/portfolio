@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: landing-page
+  name: portfolio-staging
   namespace: larsvanherk
 spec:
   replicas: 1
@@ -14,6 +14,7 @@ spec:
     metadata:
       labels:
         module: portfolio
+        env: staging
     spec:
       imagePullSecrets:
         - name: gitlab

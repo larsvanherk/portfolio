@@ -3,6 +3,7 @@ kind: Service
 metadata:
   labels:
     module: portfolio
+    env: production
   name: portfolio
   namespace: larsvanherk
 spec:
@@ -17,4 +18,5 @@ spec:
     targetPort: 5001
   selector:
     module: portfolio
+    env: production
   sessionAffinity: None

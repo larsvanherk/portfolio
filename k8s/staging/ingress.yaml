@@ -3,7 +3,8 @@ kind: Ingress
 metadata:
   labels:
     module: portfolio
-  name: portfolio
+    env: staging
+  name: portfolio-staging
   namespace: larsvanherk
   annotations:
     kubernetes.io/tls-acme: "true"
@@ -11,21 +12,13 @@ metadata:
 spec:
   tls:
   - hosts:
-    - www.larsvanherk.com
-    - larsvanherk.com
-    secretName: portfolio-tls
+    - staging.larsvanherk.com
+    secretName: portfolio-staging-tls
   rules:
-  - host: www.larsvanherk.com
+  - host: staging.larsvanherk.com
     http:
       paths:
       - path: /*
         backend:
-          serviceName: portfolio
-          servicePort: 80
-  - host: larsvanherk.com
-    http:
-      paths:
-      - path: /*
-        backend:
-          serviceName: portfolio
+          serviceName: portfolio-staging
           servicePort: 80
