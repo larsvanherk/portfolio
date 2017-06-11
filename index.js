@@ -15,6 +15,8 @@ var forceSSL = function(req, res, next) {
         } else {
             url = "https://" + req.headers.host;
         }
+
+        console.log("Redirecting to url:", url);
         res.redirect(301, url);
     } else {
       next();
