@@ -11,7 +11,7 @@ var sslEnforcer = function(req, res, next) {
   var proto = req.headers['x-forwarded-proto'];
 
   if (proto === "http") {
-    res.redirect("https://" + req.headers.host + req.url);
+    res.redirect(301, "https://" + req.headers.host + req.url);
   } else {
     next();
   }
