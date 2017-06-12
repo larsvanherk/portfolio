@@ -8,15 +8,19 @@ var prefix = "[PORTFOLIO v" + pjson.version + "] ";
 
 // Protocol Enforcer
 var sslEnforcer = function(req, res, next) {
-    var proto = req.headers['x-forwarded-proto'];
-    console.log("Detected proxied protocol:", proto);
+  var proto = req.headers['x-forwarded-proto'];
+
+  if (proto === "http") {
+    res.redirect("https://" + req.headers.host + req.url);
+  } else {
     next();
+  }
 };
 
 // Request logger
 var logger = function(req, res, next) {
-    console.log(prefix + "Received request to url '" + req.url + "': ", req.headers['user-agent']);
-    next();
+  console.log(prefix + "Received request to url '" + req.url + "': ", req.headers['user-agent']);
+  next();
 };
 
 // Disable server signature
@@ -31,7 +35,7 @@ router.use(express.static('dist'));
 
 // Route definitions
 router.get('/', function (req, res) {
-    res.sendFile('dist/index.html', { root : __dirname });
+  res.sendFile('dist/index.html', { root : __dirname });
 });
 
 //// MISC APPS ////
@@ -39,7 +43,7 @@ router.get('/', function (req, res) {
 var health = express.Router();
 
 health.get('/', function(req, res) {
-    res.sendStatus(200);
+  res.sendStatus(200);
 });
 
 // Bind routers
@@ -48,5 +52,5 @@ app.use('/', [sslEnforcer, logger, router]);
 
 // Start the app!
 app.listen(5000, function() {
-    console.log(prefix + "Server started!");
+  console.log(prefix + "Server started!");
 });
