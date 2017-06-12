@@ -6,6 +6,13 @@ var pjson = require('./package.json');
 // Logging Prefix
 var prefix = "[PORTFOLIO v" + pjson.version + "] ";
 
+// Protocol Enforcer
+var sslEnforcer = function(req, res, next) {
+    var proto = req.headers['x-forwarded-proto'];
+    console.log("Detected proxied protocol:", proto);
+    next();
+};
+
 // Request logger
 var logger = function(req, res, next) {
     console.log(prefix + "Received request to url '" + req.url + "': ", req.headers['user-agent']);
@@ -37,7 +44,7 @@ health.get('/', function(req, res) {
 
 // Bind routers
 app.use('/healthz', health);
-app.use('/', [logger, router]);
+app.use('/', [sslEnforcer, logger, router]);
 
 // Start the app!
 app.listen(5000, function() {
