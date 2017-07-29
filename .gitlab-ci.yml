@@ -24,7 +24,7 @@ Build Staging Image:
   services:
     - docker:dind
   variables:
-    IMAGE_TAG: $CI_REGISTRY_IMAGE:staging-$CI_COMMIT_REF_SLUG
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:staging-${CI_COMMIT_SHA:0:8}
   script:
     - docker info
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD registry.gitlab.com
@@ -39,7 +39,7 @@ Deploy to Staging:
   stage: deploy
   image: google/cloud-sdk
   variables:
-      IMAGE_TAG: staging-$CI_COMMIT_REF_SLUG
+      IMAGE_TAG: staging-${CI_COMMIT_SHA:0:8}
   script:
     - echo "$GOOGLE_KEY" > key.json
     - gcloud auth activate-service-account --key-file key.json
