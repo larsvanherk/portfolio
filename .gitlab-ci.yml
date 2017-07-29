@@ -23,9 +23,8 @@ Build Staging Image:
   image: docker:latest
   services:
     - docker:dind
-  variables:
-    IMAGE_TAG: $CI_REGISTRY_IMAGE:staging-${CI_COMMIT_SHA:0:8}
   script:
+    - export IMAGE_TAG=$CI_REGISTRY_IMAGE:staging-${CI_COMMIT_SHA:0:8}
     - docker info
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD registry.gitlab.com
     - docker build -t $IMAGE_TAG .
@@ -38,9 +37,8 @@ Build Staging Image:
 Deploy to Staging:
   stage: deploy
   image: google/cloud-sdk
-  variables:
-      IMAGE_TAG: staging-${CI_COMMIT_SHA:0:8}
   script:
+    - export IMAGE_TAG=staging-${CI_COMMIT_SHA:0:8}
     - echo "$GOOGLE_KEY" > key.json
     - gcloud auth activate-service-account --key-file key.json
     - gcloud config set compute/zone europe-west1-c
