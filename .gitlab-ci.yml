@@ -22,7 +22,7 @@ Build App:
       - index.js
 
 Build Docker Image:
-  stage: docker
+  stage: dist
   image: docker:latest
   services:
     - docker:dind
