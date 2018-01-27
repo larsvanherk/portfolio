@@ -3,12 +3,15 @@ stages:
   - dist
   - deploy
 
+variables:
+  DOCKER_IMAGE: eu.gcr.io/kubernetes-155014/larsvanherk/portfolio
+
 Build App:
   stage: build
-  image: node:6.10
+  image: node:6
   script:
-    - npm install
-    - npm run-script build
+    - yarn
+    - yarn build
   artifacts:
     when: always
     expire_in: 5 days
@@ -18,78 +21,47 @@ Build App:
       - package.json
       - index.js
 
-Build Staging Image:
-  stage: dist
+Build Docker Image:
+  stage: docker
   image: docker:latest
   services:
     - docker:dind
   script:
-    - export IMAGE_TAG=$CI_REGISTRY_IMAGE:staging-${CI_COMMIT_SHA:0:8}
-    - docker info
-    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD registry.gitlab.com
-    - docker build -t $IMAGE_TAG .
-    - docker push $IMAGE_TAG
-  dependencies:
-    - Build App
+    - docker login -u _json_key -p "$(echo $GCLOUD_SERVICE_KEY | base64 -d)" https://eu.gcr.io
+    - docker build -t ${DOCKER_IMAGE}:${CI_COMMIT_SHA:0:8} .
+    - docker tag ${DOCKER_IMAGE}:${CI_COMMIT_SHA:0:8} ${DOCKER_IMAGE}:latest
+    - docker push ${DOCKER_IMAGE}:${CI_COMMIT_SHA:0:8}
+    - docker push ${DOCKER_IMAGE}:latest
   only:
-    - develop
+    - master
 
 Deploy to Staging:
   stage: deploy
-  image: google/cloud-sdk
+  image: google/cloud-sdk:alpine
   script:
-    - export IMAGE_TAG=staging-${CI_COMMIT_SHA:0:8}
-    - echo "$GOOGLE_KEY" > key.json
+    - echo $GCLOUD_SERVICE_KEY | base64 -d > key.json
+    - gcloud components install kubectl
     - gcloud auth activate-service-account --key-file key.json
-    - gcloud config set compute/zone europe-west1-c
-    - gcloud config set project kubernetes-155014
-    - gcloud config set container/use_client_certificate True
-    - gcloud container clusters get-credentials kube-prd
-    - sed -i 's/___DPL_VERSION_TAG___/'"$IMAGE_TAG"'/g' k8s/staging/deployment.yaml
-    - kubectl apply -f k8s/staging/deployment.yaml
+    - gcloud container clusters get-credentials irrealis-prd --zone europe-west1-c --project kubernetes-155014
+    - kubectl -n larsvanherk set image deployment/portfolio-staging app=${DOCKER_IMAGE}:${CI_COMMIT_SHA:0:8}
   environment:
     name: Staging
     url: https://staging.larsvanherk.com
   only:
-    - develop
-
-Build Production Image:
-  stage: dist
-  image: docker:latest
-  services:
-    - docker:dind
-  variables:
-      IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
-  script:
-    - docker info
-    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD registry.gitlab.com
-    - docker build -t $IMAGE_TAG .
-    - docker push $IMAGE_TAG
-  dependencies:
-    - Build App
-  only:
-    - tags
-  except:
-    - ^(?!master$)
+    - master
 
 Deploy to Production:
   stage: deploy
-  image: google/cloud-sdk
-  variables:
-      IMAGE_TAG: $CI_COMMIT_TAG
+  image: google/cloud-sdk:alpine
   script:
-    - echo "$GOOGLE_KEY" > key.json
+    - echo $GCLOUD_SERVICE_KEY | base64 -d > key.json
+    - gcloud components install kubectl
     - gcloud auth activate-service-account --key-file key.json
-    - gcloud config set compute/zone europe-west1-c
-    - gcloud config set project kubernetes-155014
-    - gcloud config set container/use_client_certificate True
-    - gcloud container clusters get-credentials kube-prd
-    - sed -i 's/___DPL_VERSION_TAG___/'"$IMAGE_TAG"'/g' k8s/production/deployment.yaml
-    - kubectl apply -f k8s/production/deployment.yaml
+    - gcloud container clusters get-credentials irrealis-prd --zone europe-west1-c --project kubernetes-155014
+    - kubectl -n larsvanherk set image deployment/portfolio app=${DOCKER_IMAGE}:${CI_COMMIT_SHA:0:8}
   environment:
     name: Production
     url: https://www.larsvanherk.com
+  when: manual
   only:
-    - tags
-  except:
-    - ^(?!master$)
+    - master
