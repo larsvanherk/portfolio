@@ -1,5 +1,4 @@
 <template>
-  <section class="vh-landing">
-    <h1>Hallo</h1>
-  </section>
+  <h1>Work in progress...</h1>
+  <p>Validating build infrastructure</p>
 </template>
