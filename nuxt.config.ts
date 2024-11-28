@@ -2,7 +2,10 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      title: 'Portfolio - Lars van Herk'
+      title: 'Portfolio - Lars van Herk',
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/favicon.png' }
+      ]
     }
   },
 
@@ -12,12 +15,23 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/eslint',
-    '@nuxt/fonts'
+    '@nuxt/fonts',
+    '@nuxtjs/tailwindcss'
   ],
 
   eslint: {
     config: {
       stylistic: true
+    }
+  },
+
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler'
+        }
+      }
     }
   },
 
