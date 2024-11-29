@@ -10,7 +10,7 @@
           Work in progress...
         </h1>
         <p class="text-white/80 text-2xl mt-2 text-nowrap">
-          Hold tight while I move things over to the new infrastucture! 🎉
+          Hold tight while I move things over to the new infrastructure! 🎉
         </p>
       </div>
     </div>
