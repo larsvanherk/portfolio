@@ -9,7 +9,6 @@ export default withNuxt(
       'no-debugger': escalateInProd(),
       'vue/no-console': escalateInProd(),
       'vue/comma-dangle': [escalateInProd(), 'never'],
-      // Barely any documentation, we'll continue as-is
       'nuxt/nuxt-config-keys-order': 'off',
       '@stylistic/indent': [escalateInProd(), 2, { SwitchCase: 1 }],
       '@stylistic/comma-dangle': [escalateInProd(), 'never'],
