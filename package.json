@@ -1,27 +1,42 @@
 {
   "name": "@vanherk/portfolio",
-  "version": "4.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "postinstall": "nuxt prepare",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "lint": "cross-env NODE_ENV=production eslint .",
-    "lint:fix": "cross-env NODE_ENV=production eslint . --fix"
+    "preview": "nuxt preview",
+    "test": "npm run test:unit && npm run test:nuxt && npm run test:e2e",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage",
+    "test:unit": "vitest --project unit",
+    "test:nuxt": "vitest --project nuxt",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
-    "@nuxt/eslint": "^1.4.1",
-    "@nuxt/fonts": "^0.11.4",
-    "nuxt": "^3.17.4",
-    "vue": "latest",
-    "vue-router": "latest"
+    "@nuxt/a11y": "^1.0.0-alpha.1",
+    "@nuxt/content": "^3.14.0",
+    "@nuxt/eslint": "^1.16.0",
+    "@nuxt/fonts": "^0.14.0",
+    "@nuxt/hints": "^1.1.2",
+    "@nuxt/icon": "^2.2.3",
+    "@nuxt/image": "^2.0.0",
+    "@nuxt/test-utils": "^4.0.3",
+    "better-sqlite3": "^12.10.0",
+    "eslint": "^10.4.1",
+    "nuxt": "^4.4.8",
+    "shadcn-nuxt": "^2.7.4",
+    "vue": "^3.5.35",
+    "vue-router": "^5.1.0"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.14.0",
-    "cross-env": "^7.0.3",
-    "sass": "^1.89.0",
-    "typescript": "^5.8.3"
+    "@playwright/test": "^1.60.0",
+    "@vitest/coverage-v8": "^4.1.8",
+    "@vue/test-utils": "^2.4.11",
+    "jsdom": "^29.1.1",
+    "playwright-core": "^1.60.0",
+    "vitest": "^4.1.8"
   }
 }
