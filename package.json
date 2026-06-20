@@ -7,6 +7,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "lint": "eslint .",
     "test": "npm run test:unit && npm run test:nuxt && npm run test:e2e",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest --coverage",
@@ -36,9 +37,20 @@
   "devDependencies": {
     "@playwright/test": "^1.60.0",
     "@vitest/coverage-v8": "^4.1.8",
+    "@vitest/eslint-plugin": "^1.6.20",
     "@vue/test-utils": "^2.4.11",
     "jsdom": "^29.1.1",
     "playwright-core": "^1.60.0",
     "vitest": "^4.1.8"
+  },
+  "allowScripts": {
+    "esbuild@0.27.7": true,
+    "esbuild@0.28.1": true,
+    "@parcel/watcher@2.5.6": true,
+    "fsevents@2.3.2": true,
+    "fsevents@2.3.3": true,
+    "unrs-resolver@1.12.2": true,
+    "better-sqlite3@12.11.1": true,
+    "sharp@0.34.5": true
   }
 }

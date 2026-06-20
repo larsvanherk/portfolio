@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/image',
     '@nuxt/test-utils',
-    'nuxt-headlessui',
+    'nuxt-headlessui'
   ],
   headlessui: {
     prefix: 'Ui'
@@ -24,9 +24,9 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [
-      tailwindcss(),
+      tailwindcss()
     ]
   },
   devtools: { enabled: true },
-  compatibilityDate: '2024-04-03',
-})
+  compatibilityDate: '2024-04-03'
+});
