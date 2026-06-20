@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand */
+  --color-main: #d35400;
+  --color-main-hover: #b84a00;
+  --color-main-foreground: #fff;
+
+  /* Surfaces */
+  --color-background: #fdf6ec;
+  --color-surface: #ffffff;
+  --color-foreground: #000000;
+  --color-muted: #6b6b6b;
+
+  /* Border */
+  --color-border: #000000;
+
+  /* Neobrutalist shadows — solid offset, no blur */
+  --shadow-brutal: 4px 4px 0px 0px #000;
+  --shadow-brutal-sm: 2px 2px 0px 0px #000;
+  --shadow-brutal-lg: 6px 6px 0px 0px #000;
+
+  /* Border radius (intentionally small — neobrutalism avoids heavy rounding) */
+  --radius-base: 4px;
+
+  /* Typography */
+  --font-sans: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Epilogue', ui-sans-serif, system-ui, sans-serif;
+  --font-weight-base: 500;
+  --font-weight-heading: 900;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-weight: var(--font-weight-base);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+  }
+}
