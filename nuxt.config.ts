@@ -1,3 +1,5 @@
+import tailwindcss from '@tailwindcss/vite';
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
@@ -10,13 +12,13 @@ export default defineNuxtConfig({
   },
 
   css: [
+    '~/assets/styles/tailwind.css',
     '~/assets/styles/main.scss'
   ],
 
   modules: [
     '@nuxt/eslint',
-    '@nuxt/fonts',
-    '@nuxtjs/tailwindcss'
+    '@nuxt/fonts'
   ],
 
   eslint: {
@@ -26,15 +28,11 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    css: {
-      preprocessorOptions: {
-        scss: {
-          api: 'modern-compiler'
-        }
-      }
-    }
+    plugins: [
+      tailwindcss()
+    ]
   },
 
   devtools: { enabled: true },
-  compatibilityDate: '2024-11-01'
+  compatibilityDate: '2026-11-01'
 });
